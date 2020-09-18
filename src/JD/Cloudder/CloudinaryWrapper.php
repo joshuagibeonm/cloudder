@@ -103,9 +103,10 @@ class CloudinaryWrapper
      * @param  string $publicId
      * @param  array $uploadOptions
      * @param  array $tags
+     * @param  bool $isLarge
      * @return CloudinaryWrapper
      */
-    public function upload($source, $publicId = null, $uploadOptions = array(), $tags = array())
+    public function upload($source, $publicId = null, $uploadOptions = array(), $tags = array(), $isLarge = false)
     {
         $defaults = array(
             'public_id' => null,
@@ -119,7 +120,11 @@ class CloudinaryWrapper
 
         $options = array_merge($options, $uploadOptions);
 
-        $this->uploadedResult = $this->getUploader()->upload($source, $options);
+        if ($isLarge) {
+            $this->uploadedResult = $this->getUploader()->upload($source, $options);
+        } else {
+            $this->uploadedResult = $this->getUploader()->upload_large($source, $options);
+        }
 
         return $this;
     }
@@ -162,10 +167,10 @@ class CloudinaryWrapper
      * @param  array $tags
      * @return CloudinaryWrapper
     */
-    public function uploadVideo($source, $publicId = null, $uploadOptions = array(), $tags = array())
+    public function uploadVideo($source, $publicId = null, $uploadOptions = array(), $tags = array(), $isLarge = false)
     {
         $options = array_merge($uploadOptions, ['resource_type' => 'video']);
-        return $this->upload($source, $publicId,  $options, $tags);
+        return $this->upload($source, $publicId,  $options, $tags, $isLarge);
     }
 
     /**
