@@ -1,25 +1,13 @@
 # Cloudder - Cloudinary wrapper for Laravel 5 / Lumen
 
-
-#### This project is not actively maintained. I might be slow to answer, as you can tell by looking at the issues. I have moved to some new projects, not in the PHP ecosystem. You can always reach out to me through my email.
-
 #### If you fork it on publish it as your own, it might be nice to credit the original author at https://github.com/teepluss/laravel4-cloudinary.
 
-[![Build Status](http://img.shields.io/travis/jrm2k6/cloudder/master.svg?style=flat-square)](https://travis-ci.org/jrm2k6/cloudder)
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
-[![Latest Version](http://img.shields.io/packagist/v/jrm2k6/cloudder.svg?style=flat-square)](https://packagist.org/packages/jrm2k6/cloudder)
-[![Total Downloads](https://img.shields.io/packagist/dt/jrm2k6/cloudder.svg?style=flat-square)](https://packagist.org/packages/jrm2k6/cloudder)
-
 > Initially forked from https://github.com/teepluss/laravel4-cloudinary.
-
-> **If there is any feature you would like feel free to open an issue or send me an email!**
+> Then forked from https://github.com/jrm2k6/cloudder.
 
 ## Installation
 
-`composer require jrm2k6/cloudder`
-
-For people still using Laravel 4.2: `composer require jrm2k6/cloudder:0.1.*` and check the branch l4 for the installation instructions.
-
+`composer require joshuagibeonm/cloudder`
 
 ## Configuration
 
@@ -63,7 +51,7 @@ Run `php artisan vendor:publish --provider="JD\Cloudder\CloudderServiceProvider"
 ### upload()
 
 ```php
-Cloudder::upload($filename, $publicId, array $options, array $tags);
+Cloudder::upload($filename, $publicId, array $options, array $tags, $isLarge);
 ```
 
 with:
@@ -72,13 +60,14 @@ with:
 * `$publicId`: the id you want your picture to have on Cloudinary, leave it null to have Cloudinary generate a random id.
 * `$options`: options for your uploaded image, check the [Cloudinary documentation](http://cloudinary.com/documentation/php_image_upload#all_upload_options) to know more
 * `$tags`: tags for your image
+* `$isLarge`: boolean whether you need to use upload_large or upload
 
 returns the `CloudinaryWrapper`.
 
 ### uploadVideo()
 
 ```php
-Cloudder::uploadVideo($filename, $publicId, array $options, array $tags);
+Cloudder::uploadVideo($filename, $publicId, array $options, array $tags, bool $isLarge);
 ```
 
 with:
@@ -87,6 +76,7 @@ with:
 * `$publicId`: the id you want your video to have on Cloudinary, leave it null to have Cloudinary generate a random id.
 * `$options`: options for your uploaded video, check the Cloudinary documentation to know more
 * `$tags`: tags for your image
+* `$isLarge`: boolean whether you need to use upload_large or upload
 
 returns the `CloudinaryWrapper`.
 
@@ -229,7 +219,3 @@ returns a `download url` for the newly created archive on Cloudinary.
 ## Running tests
 
 `phpunit`
-
-## Example
-
-You can find a working example in the repo [cloudder-l5-example](https://github.com/jrm2k6/cloudder-l5-sample-project)
