@@ -121,9 +121,9 @@ class CloudinaryWrapper
         $options = array_merge($options, $uploadOptions);
 
         if ($isLarge) {
-            $this->uploadedResult = $this->getUploader()->upload($source, $options);
-        } else {
             $this->uploadedResult = $this->getUploader()->upload_large($source, $options);
+        } else {
+            $this->uploadedResult = $this->getUploader()->upload($source, $options);
         }
 
         return $this;
